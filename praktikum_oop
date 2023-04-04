@@ -1,0 +1,141 @@
+#include "MyString.h"
+#include <iostream>
+
+
+int MyString::length(char* str)
+{
+	int counter = 0;
+	while (*str!='/0')
+	{
+		str++;
+		counter++;
+	}
+	return counter;
+	
+}
+
+char& MyString::at(unsigned indx, char& str)
+{
+	int counter = 0;
+	while (counter != indx)
+	{
+		if (str == '/0')
+		{
+			throw std::exception("greshka");
+		}
+		str++;
+		counter++;
+	}
+	return str;
+}
+
+int MyString::find(char c, unsigned startPos, char* str)
+{
+	int counter = 0;
+	for (size_t i = 0; i < startPos; i++)
+	{
+		str++;
+		counter++;
+	}
+	while (c != *str)
+	{
+		if (*str == '/0')
+		{
+			return -1;
+		}
+		str++;
+		counter++;
+	}
+	return counter;
+}
+
+bool MyString::empty(char* str)
+{
+	if (*str == '/0')
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+MyString MyString::substr(unsigned pos, unsigned n, char* str)
+{
+	char* substr = new char[n];
+	if (pos > MyString::length(str))
+	{
+		throw std::exception("pos e mn golqm");
+	}
+	if (pos + n > MyString::length(str))
+	{
+		for (size_t i = 0; i < MyString::length(str) - pos; i++)
+		{
+			substr[i] = str[pos + i];
+		}
+	}
+	else
+	{
+		for (size_t i = 0; i < n; i++)
+		{
+			substr[i] == str[pos + i];
+		}
+	}
+	return substr;
+	delete[] substr;
+}
+
+
+
+
+
+#ifndef MYSTRING_H_
+
+#define MYSTRING_H_
+
+class MyString
+{
+public:
+	MyString(const char* str);
+	int length(char* str);
+	char& at(unsigned indx, char& str);
+	int find(char c, unsigned startPos, char* str);
+	bool empty(char * str);
+	MyString substr(unsigned pos, unsigned n, char* str);
+	void append(const MyString& str);
+	void print();
+	
+private:
+
+};
+
+
+#endif // !MYSTRING_H_
+
+
+
+#include <iostream>
+
+
+/*
+* ----Реализирайте клас MyString, който наподобява std::string (Клас за низови променливи). 
+Създайте голяма четворка, като конструктура по подразбиране да инициализира обекта като празен низ. Класа да съдържа и следните член-функци:
+
+------MyString(const char * str) - конструктор, който инициализира обекта чрез с-низ
+length() - връща дължината на низа
+char& at(unsigned indx) - дава достъп до символа на индекс indx. Ако няма такъв индекс, метода да хвърли грешка.
+find(char c, unsigned startPos = 0) - връща първия индекс, на който се намира символа с, започвайки от startPos нататък.
+====Ако такъвсимвол няма, метода да върне -1.
+empty() - връща дали низа е празен.
+----MyString substr(unsigned pos = 0, unsigned n = 0) - връща подниза започващ на индекс pos и имащ дължина n символа. 
+Ако няма индекс pos, метода да хвърли грешка. Ако pos+n > length(), да се върне подниза започващ от pos и стигащ до края на низа.
+append(const MyString& str) - долепва низа str в края.
+print() - отпечатва низа на екрана
+*/
+
+
+int main()
+{
+    std::cout << "Hello World!\n";
+}
